@@ -1,0 +1,7 @@
+data/browser_profile/
+data/seen_issues.json
+data/bot.log*
+config.yaml
+__pycache__/
+*.pyc
+.venv/

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip3 --version)",
+      "Bash(python -c \"from src.config_loader import load_config; print\\('Config loader: OK'\\)\")",
+      "Bash(python -c \"from src.state import SeenIssuesStore; s = SeenIssuesStore\\(\\); s.mark_seen\\('test-1'\\); print\\(f'State store: OK \\(count={s.count\\(\\)}\\)'\\)\")",
+      "Bash(python -c \"from src.notifier import notify_macos; print\\('Notifier: OK'\\)\")",
+      "Bash(python -c \"from src.browser import launch_browser; print\\('Browser module: OK'\\)\")",
+      "Bash(python -c \"from src.monitor import parse_issues; print\\('Monitor module: OK'\\)\")",
+      "Bash(curl -s \"https://api.telegram.org/bot8505924315:AAE-6Vm2r_HoUXxRJPDWg_1vZYc5_t1iArI/getUpdates\")",
+      "Bash(python -m json.tool)",
+      "Bash(python -c ':*)",
+      "Bash(python -c \"from src.main import main; print\\('All imports OK'\\)\")",
+      "Bash(chmod +x /Users/nottejas/Desktop/code/ticketing-bot/run.sh)"
+    ]
+  }
+}
