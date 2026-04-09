@@ -63,19 +63,9 @@ async def parse_issues(page: Page, base_url: str) -> list[Issue]:
 def filter_new_issues(
     issues: list[Issue],
     state: SeenIssuesStore,
-    subject_filters: list[str],
 ) -> list[Issue]:
-    """Return issues that are new (not seen before) and match at least one subject filter."""
-    new_issues = []
-    for issue in issues:
-        if state.has_seen(issue.issue_id):
-            continue
-        if subject_filters:
-            matched = any(f.lower() in issue.subject.lower() for f in subject_filters)
-            if not matched:
-                continue
-        new_issues.append(issue)
-    return new_issues
+    """Return issues that have not been seen before."""
+    return [issue for issue in issues if not state.has_seen(issue.issue_id)]
 
 
 async def dump_page_html(page: Page, output_path: str = "data/page_dump.html") -> None:

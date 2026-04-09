@@ -3,7 +3,6 @@ import yaml
 
 DEFAULTS = {
     "poll_interval_seconds": 30,
-    "subject_filters": [],
     "browser": {
         "user_data_dir": "./data/browser_profile",
         "headless": False,

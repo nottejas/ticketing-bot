@@ -1,13 +1,13 @@
 # Ticketing Bot
 
-Monitors the [Website4SG Support Ticketing](https://support.website4sg.saint-gobain.io/issues) portal (Redmine) for new issues matching specific subjects (e.g., `[Access]`) and sends alerts via **desktop notifications** (macOS/Windows) and **Telegram**.
+Monitors the [Website4SG Support Ticketing](https://support.website4sg.saint-gobain.io/issues) portal (Redmine) for **all new issues** and sends alerts via **desktop notifications** (macOS/Windows) and **Telegram**.
 
 ## How It Works
 
 1. Bot opens a Chromium browser window
 2. You log in manually (Okta SSO + MFA)
 3. Bot saves your session and starts polling every 30s
-4. When a new issue matches your filters, you get notified on desktop + Telegram
+4. When a new issue appears, you get notified on desktop + Telegram
 5. If the session expires, bot pauses and asks you to re-login
 
 ---
@@ -59,9 +59,6 @@ Edit `config.yaml`:
 target_url: "https://support.website4sg.saint-gobain.io/issues"
 poll_interval_seconds: 30
 
-subject_filters:
-  - "[Access]"
-
 telegram:
   bot_token: "YOUR_BOT_TOKEN"
   chat_id: "YOUR_CHAT_ID"
@@ -76,7 +73,6 @@ notifications:
   telegram: true
 ```
 
-- `subject_filters` — list of keywords to match in issue subjects (case-insensitive)
 - `poll_interval_seconds` — how often to check for new issues
 - `headless` — set to `true` to hide the browser window (only after first login)
 
@@ -200,13 +196,13 @@ launchctl unload ~/Library/LaunchAgents/com.ticketingbot.plist
 
 ```
 ticketing-bot/
-├── config.yaml              # Settings (URL, filters, Telegram, polling)
+├── config.yaml              # Settings (URL, Telegram, polling)
 ├── requirements.txt         # Python dependencies
 ├── run.sh                   # Auto-restart wrapper script
 ├── src/
 │   ├── main.py              # Entry point + polling loop
 │   ├── browser.py           # Playwright browser session management
-│   ├── monitor.py           # Issue parsing + filtering
+│   ├── monitor.py           # Issue parsing + new-issue detection
 │   ├── notifier.py          # Desktop + Telegram alerts
 │   ├── state.py             # Seen issues tracking (JSON)
 │   └── config_loader.py     # Config loading + validation

@@ -95,7 +95,7 @@ async def run_bot(config: dict, dump_html: bool = False) -> None:
             # Parse and filter issues
             try:
                 issues = await parse_issues(page, config["target_url"])
-                new_issues = filter_new_issues(issues, state, config.get("subject_filters", []))
+                new_issues = filter_new_issues(issues, state)
                 consecutive_failures = 0
             except Exception as e:
                 consecutive_failures += 1
